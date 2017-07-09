@@ -1,3 +1,4 @@
 module.exports = {
-  "Dumb": require('./dumb')
+  "Dumb": require('./dumb'),
+  "Noob": require('./noob')
 };
