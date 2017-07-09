@@ -2,22 +2,19 @@ const Score = require('../models').Score;
 
 const utils = require('../utils');
 
-class Noob {
+class EpsilonGreedy {
   constructor(){
-    this.name = 'noob';
+    this.name = 'E.G.';
   }
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     const threshold = Math.max(10, Math.floor(this.config.round*0.1));
     let selectedBanditIndex = -1;
-    if (round < threshold) {
+    if (round < threshold || Math.random() < 0.1) { // epsilon
       selectedBanditIndex = Math.floor(Math.random()*this.config.numOfBandits);
     } else {
-      if (this.selectedBanditIndex === undefined) {
-        this.selectedBanditIndex = utils.argmax(this.scoreboard,
+      selectedBanditIndex = utils.argmax(this.scoreboard,
                                                 score => score.positive/(score.positive + score.negative));
-      }
-      selectedBanditIndex = this.selectedBanditIndex;
     }
     const result = getResultByBanditIndexFunc(selectedBanditIndex);
     this.scoreboard[selectedBanditIndex].process(result);
@@ -29,4 +26,4 @@ class Noob {
   }
 }
 
-module.exports = Noob;
+module.exports = EpsilonGreedy;

@@ -1,4 +1,5 @@
 module.exports = {
   "Dumb": require('./dumb'),
-  "Noob": require('./noob')
+  "Noob": require('./noob'),
+  "EpsilonGreedy": require('./epsilonGreedy')
 };
