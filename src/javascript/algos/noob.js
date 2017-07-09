@@ -8,7 +8,7 @@ class Noob {
   }
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
-    const threshold = Math.max(10, Math.floor(this.config.round*0.1));
+    const threshold = Math.max(this.config.exploreNum, Math.floor(this.config.round*this.config.exploreRatio));
     let selectedBanditIndex = -1;
     if (round < threshold) {
       selectedBanditIndex = Math.floor(Math.random()*this.config.numOfBandits);

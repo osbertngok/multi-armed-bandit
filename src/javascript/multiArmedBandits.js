@@ -55,7 +55,7 @@ class MultiArmedBandits {
                         .map(_ => new Score());
     const zeroRegretScoreboard = new Score();
     this.baseProbability = [...Array(bct)]
-                           .map(_ => 0.2 + Math.random()*0.1);
+                           .map(_ => (2 + Math.random()) * 0.01);
     this.givenProbability = [...Array(bct)]
                             .map(_ => [...Array(dct)]
                               .map(_ => [...Array(vct)]
@@ -106,13 +106,17 @@ class MultiArmedBandits {
       statement += '(zRegret): ' + zeroRegretBanditIndex + ',' + zeroRegretSelectedResult + '(' + zeroRegretScoreboard.positive + ')' + ';';
       // console.log(statement);
     }
+    const finalScores = {};
     // Print Result
     let statement = '';
     for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
-      statement += '(' + this.algorithms[aIndex].name + '):' +  '' + (scoreboard[aIndex].positive/this.config.round*100).toFixed(2) + '%' + '; ';
+      statement += '(' + this.algorithms[aIndex].name + '):' +  '' + (scoreboard[aIndex].positive/zeroRegretScoreboard.positive*100).toFixed(2) + '%' + '; ';
+      finalScores[this.algorithms[aIndex].name] = scoreboard[aIndex].positive;
     }
-    statement += '(zRegret): ' + '' + (zeroRegretScoreboard.positive/this.config.round*100).toFixed(2) + '%' + ';';
+    statement += '(zRegret): ' + '' + (zeroRegretScoreboard.positive/zeroRegretScoreboard.positive*100).toFixed(2) + '%' + ';';
+    finalScores['zRegret'] = zeroRegretScoreboard.positive;
     console.log(statement);
+    return finalScores;
   }
 }
 

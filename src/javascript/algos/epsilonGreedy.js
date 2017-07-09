@@ -9,7 +9,7 @@ class EpsilonGreedy {
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     let selectedBanditIndex = -1;
-    if (Math.random() < 0.1) { // epsilon
+    if (Math.random() < this.config.exploreRatio) { // epsilon
       selectedBanditIndex = Math.floor(Math.random()*this.config.numOfBandits);
     } else {
       selectedBanditIndex = utils.argmax(this.scoreboard,

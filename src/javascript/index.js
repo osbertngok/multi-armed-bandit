@@ -10,20 +10,44 @@ const gameAsync = () => {
     "round": 100000,
     "numOfBandits": 3,
     "numOfDimensionOfVector": 1,
-    "numOfValuePerDimension": 3
+    "numOfValuePerDimension": 3,
+    "exploreNum": 1000,
+    "exploreRatio": 0.03
   });
   return system.runAsync();
 }
 
 const runGameAsync = async (numOfGames) => {
+  const gameScores = [];
   for (let i = 0; i < numOfGames; ++i) {
-    const p = await gameAsync();
+    gameScores.push(await gameAsync());
   }
-  return 1;
+  const finalGameScore = gameScores.reduce((accumulator, currentValue, currentIndex) => {
+    if (accumulator.hasOwnProperty('zRegret')) {
+      for (let key in currentValue) {
+        accumulator[key] += currentValue[key];
+      }
+      return accumulator;
+    } else {
+      const newAccumulator = {};
+      for (let key in currentValue) {
+        newAccumulator[key] = currentValue[key];
+      }
+      return newAccumulator;
+    }
+  }, {});
+  let statement = '';
+  for (let key in finalGameScore) {
+    statement += '(' + key + '): ' + (finalGameScore[key]/finalGameScore['zRegret']*100).toFixed(2) + '%, ';
+  }
+  statement += '(zRegret): 100.00%';
+
+  console.log('------------ final result -------------');
+  console.log(statement);
 }
 
 const main = () => {
-  runGameAsync(10);
+  runGameAsync(20);
 }
 
 main();
