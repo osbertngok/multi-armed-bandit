@@ -11,7 +11,7 @@ class BayesianMachine {
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     // Calculate Beta Sample for all bandits.
-    // If alpha and beta are zero, use uniform distribution
+    // If alpha and beta are too small, use uniform distribution
     const selectedBanditIndex = utils.argmax(this.scoreboard,
                                              score => score.positive + score.negative < this.config.exploreNum
                                                       ? Math.random()
