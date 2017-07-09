@@ -4,7 +4,7 @@ const algos = require('./algos');
 
 const gameAsync = () => {
   const system = new System();
-  system.loadAlgorithms([new algos.Dumb(), new algos.EpsilonGreedy(), new algos.Noob()]);
+  system.loadAlgorithms([new algos.Dumb(), new algos.EpsilonGreedy(), new algos.Noob(), new algos.BayesianMachine()]);
   // system.loadAlgorithms([new Noob(), new EpsilonGreedy(), new BayesianMachine()]);
   system.loadConfig({
     "round": 100000,

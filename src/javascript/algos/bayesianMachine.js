@@ -1,3 +1,5 @@
+const jStat = require('jStat').jStat;
+
 const Score = require('../models').Score;
 
 const utils = require('../utils');
@@ -8,13 +10,10 @@ class BayesianMachine {
   }
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
-    let selectedBanditIndex = -1;
-    if (Math.random() < 0.1) { // epsilon
-      selectedBanditIndex = Math.floor(Math.random()*this.config.numOfBandits);
-    } else {
-      selectedBanditIndex = utils.argmax(this.scoreboard,
-                                                score => score.positive + score.negative === 0 ? 0 : score.positive/(score.positive + score.negative));
-    }
+    // Calculate Beta Sample for all bandits.
+    // If alpha and beta are zero, use uniform distribution
+    const selectedBanditIndex = utils.argmax(this.scoreboard,
+                                                score => score.positive + score.negative === 0 ? Math.random(): jStat.beta.sample(score.positive, score.negative));
     const result = getResultByBanditIndexFunc(selectedBanditIndex);
     this.scoreboard[selectedBanditIndex].process(result);
   }
@@ -25,4 +24,4 @@ class BayesianMachine {
   }
 }
 
-module.exports = EpsilonGreedy;
+module.exports = BayesianMachine;

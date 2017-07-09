@@ -1,5 +1,6 @@
 module.exports = {
   "Dumb": require('./dumb'),
   "Noob": require('./noob'),
-  "EpsilonGreedy": require('./epsilonGreedy')
+  "EpsilonGreedy": require('./epsilonGreedy'),
+  "BayesianMachine": require('./bayesianMachine')
 };
