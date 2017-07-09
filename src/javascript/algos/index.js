@@ -1,10 +1,10 @@
 class Dumb {
   constructor(){
-
+    this.name = 'dumb';
   }
 
-  getBanditIndex(round, selectedVector, callback) {
-    callback(0);
+  getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
+    const result = getResultByBanditIndexFunc(0);
   }
 
   loadConfig () {

@@ -51,7 +51,7 @@ class MultiArmedBandits {
     return -Math.log2(probability).toFixed(2);
   }
 
-  async run() {
+  async runAsync() {
     const bct = this.config.numOfBandits;
     const dct = this.config.numOfDimensionOfVector;
     const vct = this.config.numOfValuePerDimension;
@@ -117,8 +117,15 @@ class MultiArmedBandits {
         statement += '(' + aIndex + '):' + algoSelectedBandit[aIndex] + ',' + algoSelectedResult[aIndex] + '(' + scoreboard[aIndex].positive + ')' + '; ';
       }
       statement += '(zRegret): ' + zeroRegretBanditIndex + ',' + zeroRegretSelectedResult + '(' + zeroRegretScoreboard.positive + ')' + ';';
-      console.log(statement);
+      // console.log(statement);
     }
+    // Print Result
+    let statement = '';
+    for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
+      statement += '(' + this.algorithms[aIndex].name + '):' +  '' + (scoreboard[aIndex].positive/this.config.round*100).toFixed(2) + '%' + '; ';
+    }
+    statement += '(zRegret): ' + '' + (zeroRegretScoreboard.positive/this.config.round*100).toFixed(2) + '%' + ';';
+    console.log(statement);
   }
 }
 

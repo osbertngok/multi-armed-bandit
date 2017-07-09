@@ -2,7 +2,7 @@ const System = require('./multiArmedBandits');
 
 const algos = require('./algos');
 
-const main = () => {
+const gameAsync = () => {
   const system = new System();
   system.loadAlgorithms([new algos.Dumb()]);
   // system.loadAlgorithms([new Noob(), new EpsilonGreedy(), new BayesianMachine()]);
@@ -12,11 +12,18 @@ const main = () => {
     "numOfDimensionOfVector": 1,
     "numOfValuePerDimension": 3
   });
-  system.run()
-  .then(() => {})
-  .catch(e => {
-    console.log(e);
-  });
+  return system.runAsync();
+}
+
+const runGameAsync = async (numOfGames) => {
+  for (let i = 0; i < numOfGames; ++i) {
+    const p = await gameAsync();
+  }
+  return 1;
+}
+
+const main = () => {
+  runGameAsync(10);
 }
 
 main();
