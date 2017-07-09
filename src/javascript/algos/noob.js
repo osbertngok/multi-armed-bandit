@@ -14,16 +14,13 @@ class Noob {
       selectedBanditIndex = Math.floor(Math.random()*this.config.numOfBandits);
     } else {
       if (this.selectedBanditIndex === undefined) {
-        this.selectedBanditIndex = utils.argmax(this.scoreboard, (score) => score.positive/(score.positive + score.negative));
+        this.selectedBanditIndex = utils.argmax(this.scoreboard,
+                                                score => score.positive/(score.positive + score.negative));
       }
       selectedBanditIndex = this.selectedBanditIndex;
     }
     const result = getResultByBanditIndexFunc(selectedBanditIndex);
-    if (result) {
-      this.scoreboard[selectedBanditIndex].positive++;
-    } else {
-      this.scoreboard[selectedBanditIndex].negative++;
-    }
+    this.scoreboard[selectedBanditIndex].process(result);
   }
 
   loadConfig (config) {

@@ -84,11 +84,7 @@ class MultiArmedBandits {
           const selectedBanditIndex = await promise;
           algoSelectedBandit[aIndex] = selectedBanditIndex;
           algoSelectedResult[aIndex] = tossResults[selectedBanditIndex];
-          if (tossResults[selectedBanditIndex]) {
-            scoreboard[aIndex].positive++;
-          } else {
-            scoreboard[aIndex].negative++;
-          }
+          scoreboard[aIndex].process(tossResults[selectedBanditIndex]);
         } catch (e) {
           console.log(e);
           exit(-1);
@@ -101,11 +97,7 @@ class MultiArmedBandits {
                                                              ? [currentIndex, currentValue]
                                                              : accumulator, undefined)[0];
       const zeroRegretSelectedResult = tossResults[zeroRegretBanditIndex];
-      if (tossResults[zeroRegretBanditIndex]) {
-       zeroRegretScoreboard.positive++;
-      } else {
-       zeroRegretScoreboard.negative++;
-      }
+      zeroRegretScoreboard.process(zeroRegretSelectedResult);
       // Print Result
       let statement = 'Round ' + round + " ";
       for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
