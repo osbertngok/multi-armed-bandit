@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "deep-freeze": "0.0.1"
+  },
+  "dependencies": {
+    "jStat": "^1.6.3"
   }
 }

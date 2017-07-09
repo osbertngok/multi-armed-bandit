@@ -2,9 +2,9 @@ const Score = require('../models').Score;
 
 const utils = require('../utils');
 
-class EpsilonGreedy {
+class BayesianMachine {
   constructor(){
-    this.name = 'E.G.';
+    this.name = 'BM';
   }
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
