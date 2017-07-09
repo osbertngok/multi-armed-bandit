@@ -40,7 +40,6 @@ const runGameAsync = async (numOfGames) => {
   for (let key in finalGameScore) {
     statement += '(' + key + '): ' + (finalGameScore[key]/finalGameScore['zRegret']*100).toFixed(2) + '%, ';
   }
-  statement += '(zRegret): 100.00%';
 
   console.log('------------ final result -------------');
   console.log(statement);
