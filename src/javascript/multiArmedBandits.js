@@ -1,11 +1,6 @@
 const deepFreeze = require('deep-freeze');
 
-class Score {
-  constructor() {
-    this.positive = 0;
-    this.negative = 0;
-  }
-}
+const Score = require('./models').Score;
 
 class MultiArmedBandits {
   constructor() {
