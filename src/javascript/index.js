@@ -4,12 +4,11 @@ const algos = require('./algos');
 
 const gameAsync = () => {
   const system = new System();
-  system.loadAlgorithms([new algos.Dumb(), new algos.EpsilonGreedy(), new algos.Noob(), new algos.BayesianMachine()]);
-  // system.loadAlgorithms([new Noob(), new EpsilonGreedy(), new BayesianMachine()]);
+  system.loadAlgorithms([new algos.EpsilonGreedy(), new algos.Noob(), new algos.BayesianMachine(), new algos.ContextualBayesianMachine()]);
   system.loadConfig({
-    "round": 100000,
+    "round": 1000000,
     "numOfBandits": 3,
-    "numOfDimensionOfVector": 1,
+    "numOfDimensionOfVector": 3,
     "numOfValuePerDimension": 3,
     "baseLevel": 10,
     "contextLevel": 10,

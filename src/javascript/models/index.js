@@ -4,6 +4,13 @@ class Score {
     this.negative = 0;
   }
 
+  clone() {
+    const ret = new Score();
+    ret.postive = this.positive;
+    ret.negative = this.negative;
+    return ret;
+  }
+
   process(result) {
     if (result) {
       this.positive++;
