@@ -101,21 +101,21 @@ class MultiArmedBandits {
       const zeroRegretSelectedResult = tossResults[zeroRegretBanditIndex];
       zeroRegretScoreboard.process(zeroRegretSelectedResult);
       // Print Result
-      let statement = 'Round ' + round + " ";
+      let statement = `Round ${round} `;
       for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
-        statement += '(' + aIndex + '):' + algoSelectedBandit[aIndex] + ',' + algoSelectedResult[aIndex] + '(' + scoreboard[aIndex].positive + ')' + '; ';
+        statement += `(${aIndex}):${algoSelectedBandit[aIndex]},${algoSelectedResult[aIndex]}(${scoreboard[aIndex].positive}); `;
       }
-      statement += '(zRegret): ' + zeroRegretBanditIndex + ',' + zeroRegretSelectedResult + '(' + zeroRegretScoreboard.positive + ')' + ';';
+      statement += `(zRegret): ${zeroRegretBanditIndex},${zeroRegretSelectedResult}(${zeroRegretScoreboard.positive});`;
       // console.log(statement);
     }
     const finalScores = {};
     // Print Result
     let statement = '';
     for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
-      statement += '(' + this.algorithms[aIndex].name + '):' +  '' + (scoreboard[aIndex].positive/zeroRegretScoreboard.positive*100).toFixed(2) + '%' + '; ';
+      statement += `(${this.algorithms[aIndex].name}):${(scoreboard[aIndex].positive/zeroRegretScoreboard.positive*100).toFixed(2)}%; `;
       finalScores[this.algorithms[aIndex].name] = scoreboard[aIndex].positive;
     }
-    statement += '(zRegret): ' + '' + (zeroRegretScoreboard.positive/zeroRegretScoreboard.positive*100).toFixed(2) + '%' + ';';
+    statement += `(zRegret): ${(zeroRegretScoreboard.positive/zeroRegretScoreboard.positive*100).toFixed(2)}%;`;
     finalScores['zRegret'] = zeroRegretScoreboard.positive;
     console.log(statement);
     return finalScores;

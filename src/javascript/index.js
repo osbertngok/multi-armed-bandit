@@ -11,8 +11,8 @@ const gameAsync = () => {
     "numOfBandits": 3,
     "numOfDimensionOfVector": 1,
     "numOfValuePerDimension": 3,
-    "baseLevel": 2,
-    "contextLevel": 2,
+    "baseLevel": 10,
+    "contextLevel": 10,
     "exploreNum": 1000,
     "exploreRatio": 0.03
   });
@@ -40,7 +40,7 @@ const runGameAsync = async (numOfGames) => {
   }, {});
   let statement = '';
   for (let key in finalGameScore) {
-    statement += '(' + key + '): ' + (finalGameScore[key]/finalGameScore['zRegret']*100).toFixed(2) + '%, ';
+    statement += `(${key}): ${(finalGameScore[key]/finalGameScore['zRegret']*100).toFixed(2)}%, `;
   }
 
   console.log('------------ final result -------------');

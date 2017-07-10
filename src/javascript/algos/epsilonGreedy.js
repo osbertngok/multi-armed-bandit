@@ -4,7 +4,7 @@ const utils = require('../utils');
 
 class EpsilonGreedy {
   constructor(){
-    this.name = 'E.G.';
+    this.name = 'EG';
   }
 
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
