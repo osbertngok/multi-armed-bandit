@@ -54,12 +54,14 @@ class MultiArmedBandits {
     const scoreboard = [...Array(act)]
                         .map(_ => new Score());
     const zeroRegretScoreboard = new Score();
+    const baseProbabilityLevel = this.config.baseLevel;
+    const givenProbabilityLevel = dct === 0 ? 1 : this.config.contextLevel / dct;
     this.baseProbability = [...Array(bct)]
-                           .map(_ => (2 + Math.random()) * 0.01);
+                           .map(_ => Math.pow(2, -1 * Math.random() * baseProbabilityLevel));
     this.givenProbability = [...Array(bct)]
                             .map(_ => [...Array(dct)]
                               .map(_ => [...Array(vct)]
-                                .map(_ => Math.random())
+                                .map(_ => Math.pow(2, -1 * Math.random() * givenProbabilityLevel))
                               )
                             );
 

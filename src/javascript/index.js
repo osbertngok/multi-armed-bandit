@@ -11,6 +11,8 @@ const gameAsync = () => {
     "numOfBandits": 3,
     "numOfDimensionOfVector": 1,
     "numOfValuePerDimension": 3,
+    "baseLevel": 2,
+    "contextLevel": 2,
     "exploreNum": 1000,
     "exploreRatio": 0.03
   });
