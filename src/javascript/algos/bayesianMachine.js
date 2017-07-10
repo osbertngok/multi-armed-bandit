@@ -9,6 +9,10 @@ class BayesianMachine {
     this.name = 'BM';
   }
 
+  get displayName() {
+    return this.name;
+  }
+
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     // Calculate Beta Sample for all bandits.
     // If alpha and beta are too small, use uniform distribution

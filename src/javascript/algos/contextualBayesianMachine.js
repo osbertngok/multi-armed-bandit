@@ -10,12 +10,15 @@ class ContextualBayesianMachine {
     this.switchToCBM = false;
   }
 
+  get displayName() {
+    return `${this.name}${this.switchToCBM?'+':'-'}`;
+  }
+
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     let scoreboard;
     if (!this.switchToCBM) {
-      if (this.scoreboard.every(score => score.positive > 0)) {
+      if (this.scoreboard.every(score => score.positive + score.negative > this.config.exploreNum)) {
         this.switchToCBM = true;
-        console.log('turbo!');
       }
     }
 
@@ -29,9 +32,10 @@ class ContextualBayesianMachine {
       scoreboard = this.scoreboard;
     }
 
-    const selectedBanditIndex = round < this.config.exploreNum
-                                ? Math.floor(Math.random()*this.config.numOfBandits)
-                                : utils.argmax(scoreboard, score => jStat.beta.sample(score.positive, score.negative));
+    const selectedBanditIndex = utils.argmax(scoreboard,
+                                             score => score.positive + score.negative < this.config.exploreNum
+                                                      ? Math.random()
+                                                      : jStat.beta.sample(score.positive, score.negative));
     const result = getResultByBanditIndexFunc(selectedBanditIndex);
     scoreboard[selectedBanditIndex].process(result);
   }

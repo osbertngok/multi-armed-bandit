@@ -7,6 +7,10 @@ class EpsilonGreedy {
     this.name = 'EG';
   }
 
+  get displayName() {
+    return this.name;
+  }
+
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     let selectedBanditIndex = -1;
     if (Math.random() < this.config.exploreRatio) { // epsilon

@@ -7,6 +7,10 @@ class Noob {
     this.name = 'noob';
   }
 
+  get displayName() {
+    return this.name;
+  }
+
   getBanditIndex(round, selectedVector, getResultByBanditIndexFunc) {
     const threshold = Math.max(this.config.exploreNum, Math.floor(this.config.round*this.config.exploreRatio));
     let selectedBanditIndex = -1;

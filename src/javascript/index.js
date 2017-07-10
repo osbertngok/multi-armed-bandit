@@ -6,12 +6,12 @@ const gameAsync = () => {
   const system = new System();
   system.loadAlgorithms([new algos.EpsilonGreedy(), new algos.Noob(), new algos.BayesianMachine(), new algos.ContextualBayesianMachine()]);
   system.loadConfig({
-    "round": 1000000,
+    "round": 100000,
     "numOfBandits": 3,
-    "numOfDimensionOfVector": 3,
+    "numOfDimensionOfVector": 1,
     "numOfValuePerDimension": 3,
-    "baseLevel": 10,
-    "contextLevel": 10,
+    "baseLevel": 2,
+    "contextLevel": 2,
     "exploreNum": 1000,
     "exploreRatio": 0.03
   });

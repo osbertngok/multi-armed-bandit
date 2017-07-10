@@ -112,7 +112,7 @@ class MultiArmedBandits {
     // Print Result
     let statement = '';
     for (let aIndex = 0; aIndex < this.algorithms.length; ++aIndex) {
-      statement += `(${this.algorithms[aIndex].name}):${(scoreboard[aIndex].positive/zeroRegretScoreboard.positive*100).toFixed(2)}%; `;
+      statement += `(${this.algorithms[aIndex].displayName}):${(scoreboard[aIndex].positive/zeroRegretScoreboard.positive*100).toFixed(2)}%; `;
       finalScores[this.algorithms[aIndex].name] = scoreboard[aIndex].positive;
     }
     statement += `(zRegret): ${(zeroRegretScoreboard.positive/zeroRegretScoreboard.positive*100).toFixed(2)}%;`;
